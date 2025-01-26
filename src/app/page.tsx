@@ -6,12 +6,11 @@ import { useState } from "react";
 
 export default function ColorPage() {
   const [isVertical, setIsVertical] = useState(false);
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState("5"); // string olarak değiştirdik
 
   const generateColors = (num: number) => {
     return Array.from({ length: num }, (_, i) => {
-      // Farklı renk grupları için başlangıç noktaları
-      const hueSteps = [0, 60, 120, 180, 240, 300]; // Kırmızı, sarı, yeşil, cyan, mavi, mor
+      const hueSteps = [0, 60, 120, 180, 240, 300];
       const baseHue = hueSteps[i % hueSteps.length];
       const offset =
         Math.floor(i / hueSteps.length) *
@@ -23,7 +22,7 @@ export default function ColorPage() {
   return (
     <div className="min-h-screen flex">
       <div className={`flex ${isVertical ? "flex-col" : ""} w-full relative`}>
-        {generateColors(count).map((color, i) => (
+        {generateColors(Number(count) || 1).map((color, i) => (
           <div key={i} className="flex-1" style={{ backgroundColor: color }} />
         ))}
 
@@ -33,9 +32,12 @@ export default function ColorPage() {
             min={1}
             max={30}
             value={count}
-            onChange={(e) =>
-              setCount(Math.min(20, Math.max(1, +e.target.value)))
-            }
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value === "" || (Number(value) >= 1 && Number(value) <= 20)) {
+                setCount(value);
+              }
+            }}
             className="w-20 bg-white/80"
           />
           <Button
