@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function ColorPage() {
@@ -43,6 +44,12 @@ export default function ColorPage() {
           >
             {isVertical ? "Yatay" : "Dikey"}
           </Button>
+          <Link
+            href={"/test"}
+            className=" text-white rounded-sm bg-black/50 p-2"
+          >
+            Test
+          </Link>
         </div>
       </div>
     </div>
