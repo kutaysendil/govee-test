@@ -6,12 +6,11 @@ import { useState } from "react";
 
 export default function ColorPage() {
   const [isVertical, setIsVertical] = useState(false);
-  const [count, setCount] = useState<string>("5");
+  const [count, setCount] = useState("5");
 
   const generateColors = (num: number) => {
     return Array.from({ length: num }, (_, i) => {
-      // Farklı renk grupları için başlangıç noktaları
-      const hueSteps = [0, 60, 120, 180, 240, 300]; // Kırmızı, sarı, yeşil, cyan, mavi, mor
+      const hueSteps = [0, 60, 120, 180, 240, 300];
       const baseHue = hueSteps[i % hueSteps.length];
       const offset =
         Math.floor(i / hueSteps.length) *
@@ -27,7 +26,17 @@ export default function ColorPage() {
           <div key={i} className="flex-1" style={{ backgroundColor: color }} />
         ))}
 
-        <div className="absolute inset-0 flex items-center justify-center gap-4">
+        {/* Grid overlay tüm renklerin üzerinde */}
+        <div className="absolute inset-0 grid grid-cols-9 grid-rows-6">
+          {Array.from({ length: 54 }).map((_, i) => (
+            <div
+              key={i}
+              className="border border-white/30 hover:bg-white/10 transition-colors cursor-pointer"
+            />
+          ))}
+        </div>
+
+        <div className="absolute inset-0 flex items-center justify-center gap-4 z-10">
           <Input
             type="text"
             inputMode="numeric"
@@ -37,11 +46,10 @@ export default function ColorPage() {
             value={count}
             onChange={(e) => {
               const value = e.target.value;
-              // Sadece sayıları kabul et
               if (/^\d*$/.test(value)) {
                 if (
                   value === "" ||
-                  (Number(value) >= 1 && Number(value) <= 40)
+                  (Number(value) >= 1 && Number(value) <= 20)
                 ) {
                   setCount(value);
                 }
@@ -57,15 +65,9 @@ export default function ColorPage() {
           </Button>
           <Link
             href={"/test"}
-            className=" text-white rounded-sm bg-black/50 p-2"
+            className="text-white rounded-sm bg-black/50 p-2"
           >
             Test
-          </Link> 
-          <Link
-            href={"/grid"}
-            className=" text-white rounded-sm bg-black/50 p-2"
-          >
-            grid
           </Link>
         </div>
       </div>
