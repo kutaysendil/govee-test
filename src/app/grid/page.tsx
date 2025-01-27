@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function ColorPage() {
   const [isVertical, setIsVertical] = useState(false);
-  const [count, setCount] = useState("5");
+  const [count, setCount] = useState("9");
 
   const generateColors = (num: number) => {
     return Array.from({ length: num }, (_, i) => {
@@ -58,7 +58,10 @@ export default function ColorPage() {
             className="w-20 bg-white/80"
           />
           <Button
-            onClick={() => setIsVertical(!isVertical)}
+            onClick={() => {
+              setIsVertical(!isVertical);
+              setCount(isVertical ? "9" : "6");
+            }}
             className="bg-white/80 text-black hover:bg-white/90"
           >
             {isVertical ? "Yatay" : "Dikey"}
@@ -68,6 +71,9 @@ export default function ColorPage() {
             className="text-white rounded-sm bg-black/50 p-2"
           >
             Test
+          </Link>{" "}
+          <Link href={"/"} className="text-white rounded-sm bg-black/50 p-2">
+            Anasayfa
           </Link>
         </div>
       </div>
