@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function ColorPage() {
   const [isVertical, setIsVertical] = useState(false);
-  const [count, setCount] = useState("9");
+  const [count, setCount] = useState("8");
 
   const generateColors = (num: number) => {
     return Array.from({ length: num }, (_, i) => {
@@ -27,8 +27,8 @@ export default function ColorPage() {
         ))}
 
         {/* Grid overlay tüm renklerin üzerinde */}
-        <div className="absolute inset-0 grid grid-cols-9 grid-rows-6">
-          {Array.from({ length: 54 }).map((_, i) => (
+        <div className="absolute inset-0 grid grid-cols-8 grid-rows-6">
+          {Array.from({ length: 48 }).map((_, i) => (
             <div
               key={i}
               className="border border-white/30 hover:bg-white/10 transition-colors cursor-pointer"
@@ -60,7 +60,7 @@ export default function ColorPage() {
           <Button
             onClick={() => {
               setIsVertical(!isVertical);
-              setCount(isVertical ? "9" : "6");
+              setCount(isVertical ? "8" : "6");
             }}
             className="bg-white/80 text-black hover:bg-white/90"
           >
